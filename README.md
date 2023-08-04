@@ -2,6 +2,13 @@
 
 海豚星空投屏大屏接收端示例
 
+#### (0) 注意 gradle\wrapper\gradle-wrapper.properties 
+demo采用本地目录使用 gradle-7.4-all.zip, 根据自己的的情况修改
+```bash 
+#distributionUrl=https\://services.gradle.org/distributions/gradle-7.4-all.zip
+手动改用上面的
+distributionUrl=file:///D:/Android/gradle-7.4-all.zip
+```
 
 ##（1）跟目录的build.gradle添加私有mevan仓库
 ```groovy
