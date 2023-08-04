@@ -18,7 +18,7 @@ maven {
 ### 2.1 添加依赖
 ```groovy
 //海豚星空投屏核心库 建议使用后台显示的最新本
-implementation 'cn.dolphinstar:ctrlCore:x.x.x'
+implementation 'cn.dolphinstar:playerCore::x.x.x'
 ```
 
 ### 2.2 其他配置
@@ -73,7 +73,7 @@ app\src\main\res\xml 中添加文件 network_security_config.xml
 
 ### 启动服务
 ```java
- //启动海豚星空SDK投屏服务
+ //启动海豚星空SDK投屏服务 要确保设备连接外网情况下启动
 @SuppressLint("CheckResult")
 private void dpsSdkStartUp(){
         /启动配置
