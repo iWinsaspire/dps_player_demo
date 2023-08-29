@@ -124,6 +124,7 @@ private void dpsSdkStartUp(){
         //启动服务
         MYOUPlayer.of(MainActivity.this)
         .StartService(cfg)
+        .observeOn(AndroidSchedulers.mainThread()) //切主线程
         .subscribe(s->{
             //投屏服务启动成功
             Log.e("MainActivity","投屏服务启动成功");

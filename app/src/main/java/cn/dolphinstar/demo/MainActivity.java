@@ -88,6 +88,7 @@ public class MainActivity extends Activity {
             //启动服务
             MYOUPlayer.of(MainActivity.this)
                     .StartService(cfg)
+                    .observeOn(AndroidSchedulers.mainThread()) //切主线程
                     .subscribe(s -> {
                         //投屏服务启动成功
                         Log.e("MainActivity","投屏服务启动成功");
@@ -109,7 +110,7 @@ public class MainActivity extends Activity {
         //获取投屏码并显示
         MYOUPlayer.of(MainActivity.this)
                 .GetScreenCode()
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread()) //切主线程
                 .subscribe(code -> {
                     ((TextView)findViewById(R.id.tv_cast_code)).setText("投屏码:"+code);
                 });
