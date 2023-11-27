@@ -25,7 +25,8 @@ maven {
 ### 2.1 添加依赖
 ```groovy
 //海豚星空投屏核心库 建议使用后台显示的最新本
-implementation 'cn.dolphinstar:playerCore::x.x.x'
+implementation 'cn.dolphinstar:playerCore:x.x.x'
+implementation 'cn.dolphinstar:dRender:x.x.x'
 ```
 
 ### 2.2 其他配置
@@ -123,6 +124,7 @@ private void dpsSdkStartUp(){
         
         //启动服务
         MYOUPlayer.of(MainActivity.this)
+        .useDRender()
         .StartService(cfg)
         .observeOn(AndroidSchedulers.mainThread()) //切主线程
         .subscribe(s->{

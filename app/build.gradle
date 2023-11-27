@@ -20,7 +20,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "cn.dolphinstar.player.demo"
-        minSdkVersion 14
+        minSdkVersion 16
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 27
         versionCode 1
@@ -52,7 +52,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //海豚星空投屏sdk
-    implementation 'cn.dolphinstar:playerCore:5.0.4'
+    implementation 'cn.dolphinstar:playerCore:5.2.2'
+    implementation 'cn.dolphinstar:dRender:1.0.0'
     //二维码生成库
     implementation 'com.google.zxing:core:3.2.1'
 }

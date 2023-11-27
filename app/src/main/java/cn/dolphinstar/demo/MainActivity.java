@@ -87,6 +87,7 @@ public class MainActivity extends Activity {
 
             //启动服务
             MYOUPlayer.of(MainActivity.this)
+                    .useDRender()
                     .StartService(cfg)
                     .observeOn(AndroidSchedulers.mainThread()) //切主线程
                     .subscribe(s -> {
