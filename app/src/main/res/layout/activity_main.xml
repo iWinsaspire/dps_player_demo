@@ -63,6 +63,12 @@
                 android:gravity="center"
                 android:textColor="#ffffff"
                 android:text="" />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:text="同一个网络内，手机扫描右上方二维码，认证成功，使用DLNA投屏" />
         </LinearLayout>
     </LinearLayout>

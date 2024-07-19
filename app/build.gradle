@@ -52,7 +52,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //海豚星空投屏sdk
-    implementation 'cn.dolphinstar:playerCore:5.2.2'
+    implementation 'cn.dolphinstar:playerCore:5.3.1'
     implementation 'cn.dolphinstar:dRender:1.0.0'
     //二维码生成库
     implementation 'com.google.zxing:core:3.2.1'
