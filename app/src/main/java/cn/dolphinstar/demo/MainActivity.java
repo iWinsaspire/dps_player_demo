@@ -68,12 +68,14 @@ public class MainActivity extends Activity {
             ((TextView)findViewById(R.id.tv_wifi)).setText("网络:"+wifiName);
             playerName="海豚星空TV-" +(int) (Math.random() * 900 + 100);
 
-            //应该在启动配置
+            //sdk启动配置
             StartUpCfg cfg = new StartUpCfg();
             cfg.PlayerName = playerName;
             cfg.IsShowLogger = BuildConfig.DEBUG;
             cfg.AppSecret = "xxxxxxx"; //这里填入你的秘钥
 
+            //cfg.useNetwork="eth0";
+            //cfg.useNetwork="wlan0";
             //demo 特殊配置信息 ，非必要。按自己想要的方式给 AppId AppSecret赋值就好
             if(!BuildConfig.dpsAppId.isEmpty()){
                 //虽然这里可以配置AppId，
