@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import cn.dolphinstar.demo.toolkit.QRHelper;
 import cn.dolphinstar.lib.player.core.MYOUPlayer;
 import cn.dolphinstar.lib.player.core.StartUpCfg;
 import cn.dolphinstar.lib.wozkit.NetHelper;
+import cn.dolphinstar.player.base.StartUpAuthType;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends Activity {
@@ -40,6 +42,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // 设置屏幕常亮
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         qrImageView = findViewById(R.id.iv_qrcode);
         qrImagePath = newQRCodeFileName();
@@ -56,6 +60,7 @@ public class MainActivity extends Activity {
 
         NetHelper netHelper = new NetHelper(getApplicationContext());
         int netType = netHelper.getConnectedType();
+        //必须确保有网络的情况下在启动sdk
         if (netType == -1) {
             wifiName = "未连接网络!";
             Toast.makeText(getApplicationContext(), "未连接网络，投屏服务未启动!", Toast.LENGTH_LONG);
@@ -74,18 +79,13 @@ public class MainActivity extends Activity {
             cfg.IsShowLogger = BuildConfig.DEBUG;
             cfg.AppSecret = "xxxxxxx"; //这里填入你的秘钥
 
-            //cfg.useNetwork="eth0";
-            //cfg.useNetwork="wlan0";
             //demo 特殊配置信息 ，非必要。按自己想要的方式给 AppId AppSecret赋值就好
             if(!BuildConfig.dpsAppId.isEmpty()){
-                //虽然这里可以配置AppId，
-                //但app/src/main/assets/dpsAppInfo文件还是必须存在，可以不配置真的值。
                 cfg.AppId = BuildConfig.dpsAppId;
             }
             if(!BuildConfig.dpsAppSecret.isEmpty()){
                 cfg.AppSecret = BuildConfig.dpsAppSecret;
             }
-
 
             //启动服务
             MYOUPlayer.of(MainActivity.this)
@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
                 .subscribe(code -> {
                     ((TextView)findViewById(R.id.tv_cast_code)).setText("投屏码:"+code);
                 });
-        //playerName = MYOUPlayer.of(MainActivity.this).getMediaRenderName();
+
         ((TextView)findViewById(R.id.tv_name)).setText(playerName);
 
     }
@@ -163,9 +163,8 @@ public class MainActivity extends Activity {
 
     @TargetApi(Build.VERSION_CODES.M)
     private void checkAndRequestPermission() {
-
+        //假设需要动态权限申请完成在启动sdk
         List<String> lackedPermission = new ArrayList<>();
-
 
         // 如果需要的权限都已经有了，那么直接调用SDK
         if (lackedPermission.size() == 0) {
