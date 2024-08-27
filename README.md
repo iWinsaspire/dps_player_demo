@@ -174,3 +174,10 @@ MYOUPlayer.of(MainActivity.this) .GetScreenCode()
 //电脑浏览器 safari firefox 可以输入网站完成设备认证后使用投屏
 MYOUPlayer.of(MainActivity.this).GetPresentationUrl();
 ```
+
+# Demo下载
+[github下载: https://github.com/iWinsaspire/dps_player_demo](https://github.com/iWinsaspire/dps_player_demo) （可获得最新的，推荐）
+
+[dps_player_demo.zip 下载](https://dolphinstar.cn/fs/demo/dps_player_demo.zip)
+
+[百度网盘下载 dps_player_demo.zip](https://pan.baidu.com/s/1QAIQtLu394F-xc6BYTty8g?pwd=idps)
