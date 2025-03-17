@@ -87,6 +87,8 @@ public class MainActivity extends Activity {
                 cfg.AppSecret = BuildConfig.dpsAppSecret;
             }
 
+            //仅允许最后一台认证过的设备有效模式
+            //MYOUPlayer.of(MainActivity.this).setAuthMode(1);
             //启动服务
             MYOUPlayer.of(MainActivity.this)
                     .useDRender()

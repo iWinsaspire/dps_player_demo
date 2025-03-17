@@ -135,7 +135,7 @@ private void dpsSdkStartUp(){
             public static final String AUTH_BY_RANDOM_ID = "randomid";
         }
         */
-        cfg.AuthType = StartUpAuthType.AUTH_BY_ANDROID_ID
+        cfg.AuthType = StartUpAuthType.AUTH_BY_ANDROID_ID;
         
         //启动服务
         MYOUPlayer.of(MainActivity.this)
@@ -166,12 +166,6 @@ MYOUPlayer.of(MainActivity.this).GetQrUrl();
   
 //获取投屏码
 MYOUPlayer.of(MainActivity.this) .GetScreenCode()
-        .observeOn(AndroidSchedulers.mainThread()) //要操作UI要切换主线程
-        .subscribe(code -> {
-            //"投屏码:"+code 
-        });
-
-//电脑浏览器 safari firefox 可以输入网站完成设备认证后使用投屏
 MYOUPlayer.of(MainActivity.this).GetPresentationUrl();
 ```
 
@@ -181,3 +175,10 @@ MYOUPlayer.of(MainActivity.this).GetPresentationUrl();
 [dps_player_demo.zip 下载](https://dolphinstar.cn/fs/demo/dps_player_demo.zip)
 
 [百度网盘下载 dps_player_demo.zip](https://pan.baidu.com/s/1QAIQtLu394F-xc6BYTty8g?pwd=idps)
+
+        .observeOn(AndroidSchedulers.mainThread()) //要操作UI要切换主线程
+        .subscribe(code -> {
+            //"投屏码:"+code 
+        });
+
+//电脑浏览器 safari firefox 可以输入网站完成设备认证后使用投屏
