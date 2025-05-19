@@ -4,6 +4,7 @@ package cn.dolphinstar.demo;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,9 +29,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class MainActivity extends Activity {
 
     //二维码图片
-    private ImageView qrImageView;
-    //二维码文件路径
-    private String qrImagePath;
+    private ImageView qrImageView; 
 
     //wifi名称
     private String wifiName;
@@ -45,8 +44,7 @@ public class MainActivity extends Activity {
         // 设置屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        qrImageView = findViewById(R.id.iv_qrcode);
-        qrImagePath = newQRCodeFileName();
+        qrImageView = findViewById(R.id.iv_qrcode); 
 
         if (Build.VERSION.SDK_INT >= 23) {
             checkAndRequestPermission();
@@ -98,6 +96,8 @@ public class MainActivity extends Activity {
                         //投屏服务启动成功
                         Log.e("MainActivity","投屏服务启动成功");
                         onSuccess();
+                        //如果需要替换音乐播放器的背景图，必须在 .useDRender()之后
+                        //MYOUPlayer.of(MainActivity.this).setMusicBackground(R.drawable.connect);
                     }, e -> {
                         //投屏服务启动失败
                         String msg = "投屏服务启动失败: "+ e.getMessage();
@@ -125,13 +125,9 @@ public class MainActivity extends Activity {
     }
 
     protected void onDestroy() {
-
-        MYOUPlayer.of(MainActivity.this).Close();
-
-        //删除二维码文件
-        File file = new File(qrImagePath);
-        if (file.exists() && file.isFile()) {
-            file.delete();
+        //关闭SDK 重要
+        if (MYOUPlayer.of(MainActivity.this).IsStartUp()){
+            MYOUPlayer.of(MainActivity.this).Close();
         }
         super.onDestroy();
     }
@@ -145,19 +141,13 @@ public class MainActivity extends Activity {
         LinearLayout line = findViewById(R.id.layout_linear);
         int ih = line.getHeight() * 2 / 3;
 
-        boolean success = new QRHelper().BuildQRCode(text, ih, ih, qrImagePath);
-        if (success) {
-            runOnUiThread(() -> qrImageView.setImageBitmap(BitmapFactory.decodeFile(qrImagePath)));
+        Bitmap qrBitmap = new QRHelper().BuildQRCode(text, ih, ih);
+        if (qrBitmap!=null) {
+            runOnUiThread(() -> qrImageView.setImageBitmap(qrBitmap));
         }
     }
 
-    //获取本次二维码文件路径
-    private String newQRCodeFileName() {
-        String rootPath = getApplicationContext().getFilesDir().getAbsolutePath();
-        String fileName = rootPath + File.separator
-                + "qr_" + System.currentTimeMillis() + ".jpg";
-        return fileName;
-    }
+ 
 
     //endregion
 

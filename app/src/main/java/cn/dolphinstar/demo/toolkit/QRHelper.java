@@ -18,7 +18,7 @@ import static android.graphics.Color.WHITE;
 public class QRHelper {
 
     // 创建一张二维码
-    public boolean BuildQRCode (String content,int width, int height, String  filePath){
+    public Bitmap BuildQRCode (String content,int width, int height){
         Bitmap bitmap = null;
         BitMatrix result = null;
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -39,14 +39,10 @@ public class QRHelper {
             }
             bitmap = Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
             bitmap.setPixels(pixels,0,w,0,0,w,h);
-            return bitmap != null && bitmap.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(filePath));
+            return bitmap;
 
-        } catch (IllegalArgumentException iae){
-            return false;
-        } catch (FileNotFoundException e) {
-            return  false;
-        } catch (WriterException e) {
-            return false;
+        } catch (IllegalArgumentException | WriterException e) {
+            return null;
         }
     }
     
